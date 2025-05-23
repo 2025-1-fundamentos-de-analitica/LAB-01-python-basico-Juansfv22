@@ -24,3 +24,37 @@ def pregunta_09():
      'jjj': 18}}
 
     """
+    from collections import defaultdict
+
+    # Abre el archivo data.csv en modo lectura
+    with open('files/input/data.csv', 'r') as file:
+        # Lee todas las líneas del archivo
+        lines = file.readlines()
+
+    # Inicializa un diccionario para almacenar la cantidad de registros por clave
+    keys_count = defaultdict(int)
+
+    # Itera sobre cada línea del archivo
+    for line in lines:
+        # Divide la línea en columnas usando la tabulación como separador
+        columns = line.strip().split('\t')
+
+        # Accede a la columna 5
+        dict = columns[4].split(',')
+
+        # Itera sobre cada elemento del diccionario
+        for item in dict:
+            # Extrae la clave del elemento
+            key = item.split(':')[0]
+            # Incrementa el contador para cada clave
+            keys_count[key] += 1
+
+    # Ordena el diccionario numéricamente
+    sorted_keys = {key: keys_count[key] for key in sorted(keys_count.keys())}
+
+    # Retorna el diccionario
+    return sorted_keys
+
+if __name__ == '__main__':
+    # Llama a la función pregunta_09 e imprime el resultado
+    print(pregunta_09())

@@ -25,3 +25,29 @@ def pregunta_07():
      (9, ['A', 'B', 'E', 'A', 'A', 'C'])]
 
     """
+    from collections import defaultdict
+
+    # Abre el archivo data.csv en modo lectura
+    with open('files/input/data.csv', 'r') as file:
+        # Lee todas las líneas del archivo
+        lines = file.readlines()
+
+    # Inicializa un diccionario para almacenar las letras asociadas a cada valor
+    columns0_1 = defaultdict(list)
+
+    # Itera sobre cada línea del archivo
+    for line in lines:
+        # Divide la línea en columnas usando la tabulación como separador
+        columns = line.strip().split('\t')
+        # Agrega la letra al valor asociado
+        columns0_1[int(columns[1])].append(columns[0])
+
+    # Convierte el diccionario a una lista de tuplas y ordena numéricamente
+    sorted_values = sorted(columns0_1.items())
+
+    # Retorna la lista de tuplas
+    return sorted_values
+
+if __name__ == '__main__':
+    # Llama a la función pregunta_07 e imprime el resultado
+    print(pregunta_07())
